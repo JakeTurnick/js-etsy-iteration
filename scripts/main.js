@@ -23,7 +23,7 @@
         let validItems = [];
         validItems = itemsArr.filter(item => {
             if (item.price >= min && item.price <= max) {
-                console.log('price:',item.price, ' of -', item.title)
+                console.log('price:',item.price.toFixed(2), ' of -', item.title)
                 return item;
             }
         })
@@ -71,5 +71,14 @@
     }
     eightPlus(items);
 
-    
+
+    //Items made by sellers
+    function selfMade(itemsArr) {
+        console.log('\nMade by seller');
+        let selfMade = [];
+        selfMade = itemsArr.filter(item => item.who_made === 'i_did');
+        selfMade.forEach(item => console.log('item -', item.title, 'is made by:', item.who_made))
+        console.log(selfMade);
+    }
+    selfMade(items)
 })();
