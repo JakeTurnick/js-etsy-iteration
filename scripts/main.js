@@ -1,3 +1,10 @@
+//_.method contains loadash
+
+const demo = _.defaults({ 'a': 1 }, { 'a': 3, 'b': 2 });
+console.log(demo);
+
+
+
 (function () { //IIFE
     'use strict';
 
@@ -15,6 +22,21 @@
         console.log('sum', sum, 'avg', avg.toFixed(2))
     }
     average(items)
+    //From lesson notes
+        // const prices = items.filter(item => { //if true, returns into the array. if false, removes item from array
+        //     return item.currency_code === "USD"
+        // }).map(item => { //chains map to make an array of only USD prices
+        //     return item.price;
+        // });
+        // const sum = prices.reduce((acc, i) => acc + i);
+        // const avg = sum / prices.length; //uses array of filtered prices as length
+    //or
+        // const itemUS = items.filter(item => {
+        //     return item.currency_code === "USD"
+        // });
+        // const sum = itemUS.reduce((acc, i) => {
+        //     return acc + i.price; //acc must be initialized because acc.price is undefined, i.price is the price of the current item
+        // }, 0) //giving initial value ensures that each obj is read and acc stays a number
 
 
     //Get array of items between $14 - $18
@@ -45,12 +67,19 @@
         // console.log('GBP items:', itemsGBP)
     }
     findBrits(items);
+    //From notes
+        // const itemGBP = items.filter(item => {
+        //     return item.currency_code === "GBP"
+        // });
+        // itemGBP.forEach(item => {
+        //     console.log(item)
+        // })
 
     //All items made of wood
     function findWoods(itemsArr) {
         console.log('\nItems made of wood')
         let woods = [];
-        itemsArr.forEach(item => {
+        itemsArr.forEach(item => { //for each not needed, just assign itemsArr.filter to variable
             if (item.materials.includes("wood")) {
                 woods.push(item);
                 console.log('item:', item.title, ' is made of ', item.materials)
@@ -59,6 +88,14 @@
         console.log(woods)
     }
     findWoods(items);
+    //From notes 
+        // const isMadeOfWood = items.filter((item) => {
+        //     item.materials.includes("wood") //filters to items made of wood
+        // }).map(item => {
+        //     return item.title; //re-maps array with only titles of wood items
+        // }).forEach(item => {
+        //     console.log(`${title}\n`) //logs re-mapped array titles
+        // })
 
 
     //find items made of 8 or more materials
@@ -67,6 +104,12 @@
         let overEight = [];
         overEight = itemsArr.filter(item => item.materials.length >= 8);
         overEight.forEach(item => console.log('item -', item.title, 'is made of:', item.materials))
+        overEight.forEach(item => {
+            console.log('item -', item.title);
+            item.materials.forEach(material => {
+                console.log(`${material}\n`)
+            })
+        })
         console.log(overEight)
     }
     eightPlus(items);
@@ -78,7 +121,7 @@
         let selfMade = [];
         selfMade = itemsArr.filter(item => item.who_made === 'i_did');
         selfMade.forEach(item => console.log('item -', item.title, 'is made by:', item.who_made))
-        console.log(selfMade);
+        console.log(`${selfMade.length} items were made by their sellers`);
     }
     selfMade(items)
 })();
